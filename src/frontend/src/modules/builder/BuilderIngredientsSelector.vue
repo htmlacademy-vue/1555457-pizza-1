@@ -9,7 +9,7 @@
           <label
             class="radio ingredients__input"
             v-for="sauce in pizza.sauces"
-            v-bind:key="sauce"
+            v-bind:key="sauce.id"
           >
             <input
               type="radio"
@@ -28,7 +28,7 @@
             <li
               class="ingredients__item"
               v-for="ingredient in pizza.ingredients"
-              v-bind:key="ingredient"
+              v-bind:key="ingredient.id"
             >
               <span
                 :class="'filling filling--' + fillingClasses[ingredient.id]"
@@ -37,10 +37,7 @@
                 >{{ ingredient.name }}</span
               >
 
-              <ItemCounter
-                :classValue="fillingClasses[ingredient.id]"
-                @increaseCount="test"
-              />
+              <ItemCounter :classValue="fillingClasses[ingredient.id]" />
             </li>
           </ul>
         </div>

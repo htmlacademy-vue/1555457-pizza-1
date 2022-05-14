@@ -3,7 +3,7 @@
     <div class="pizza pizza--foundation--big-tomato">
       <div
         class="pizza__wrapper"
-        @drop="onDrop($event, 1)"
+        @drop="onDrop($event)"
         @dragover.prevent
         @dragenter.prevent
       >

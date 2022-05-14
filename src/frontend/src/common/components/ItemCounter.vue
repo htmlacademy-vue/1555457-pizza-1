@@ -52,7 +52,7 @@ export default {
         this.count--;
       }
       if (this.count == 0) {
-        this.isDisabledMinusBtn = false;
+        this.isDisabledMinusBtn = true;
       }
       this.$emit("decreaseCount", this.count, this.classValue);
     },
