@@ -6,8 +6,9 @@
       <div class="sheet__content diameter">
         <label
           :class="'diameter__input diameter__input--' + getSizeValue(size.id)"
-          v-for="size in pizza.sizes"
+          v-for="size in sizes"
           :key="size.id"
+          @click="changeSize(size.id)"
         >
           <RadioButton
             type="radio"
@@ -29,13 +30,24 @@ export default {
   components: {
     RadioButton,
   },
-  props: {
-    pizza: {
-      type: Object,
-      required: true,
+  methods: {
+    getSizeValue(id) {
+      switch (id) {
+        case 1:
+          return "small";
+        case 2:
+          return "normal";
+        case 3:
+          return "large";
+      }
     },
-    getSizeValue: {
-      type: Function,
+    changeSize(id) {
+      this.$emit("onSizeChange", id);
+    },
+  },
+  props: {
+    sizes: {
+      type: Array,
       required: true,
     },
   },

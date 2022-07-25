@@ -6,14 +6,15 @@
       <div class="sheet__content dough">
         <label
           :class="'dough__input dough__input--' + getDoughValue(dough.id)"
-          v-for="dough in pizza.dough"
+          v-for="dough in doughs"
           v-bind:key="dough.id"
+          @click="changeDough(dough.id)"
         >
           <RadioButton
             name="dought"
             :value="getDoughValue(dough.id)"
             class="visually-hidden"
-            checked
+            :checked="dough.id == selectedDoughId"
           />
           <b>{{ dough.name }}</b>
           <span>{{ dough.description }}</span>
@@ -27,17 +28,25 @@
 import RadioButton from "../../common/components/RadioButton.vue";
 
 export default {
+  methods: {
+    getDoughValue(id) {
+      return id == 1 ? "light" : "large";
+    },
+    changeDough(id) {
+      this.$emit("onDoughChange", id);
+    },
+  },
   name: "BuilderDoughSelector",
   components: {
     RadioButton,
   },
   props: {
-    pizza: {
-      type: Object,
+    doughs: {
+      type: Array,
       required: true,
     },
-    getDoughValue: {
-      type: Function,
+    selectedDoughId: {
+      type: Number,
       required: true,
     },
   },

@@ -8,14 +8,15 @@
 
           <label
             class="radio ingredients__input"
-            v-for="sauce in pizza.sauces"
-            v-bind:key="sauce"
+            v-for="sauce in sauces"
+            v-bind:key="sauce.id"
           >
             <input
               type="radio"
               name="sauce"
               :value="getSauceValue(sauce.id)"
-              checked
+              :checked="sauce.id == selectedSauceId"
+              @click="changeSauce(sauce.id)"
             />
             <span>{{ sauce.name }}</span>
           </label>
@@ -27,19 +28,20 @@
           <ul class="ingredients__list">
             <li
               class="ingredients__item"
-              v-for="ingredient in pizza.ingredients"
-              v-bind:key="ingredient"
+              v-for="ingredient in ingredients"
+              v-bind:key="ingredient.id"
             >
               <span
                 :class="'filling filling--' + fillingClasses[ingredient.id]"
                 draggable
                 @dragstart="onDrag"
-                >{{ ingredient.name }}</span
               >
+                {{ ingredient.name }}
+              </span>
 
               <ItemCounter
                 :classValue="fillingClasses[ingredient.id]"
-                @increaseCount="test"
+                @changeCount="changeIngredient($event)"
               />
             </li>
           </ul>
@@ -57,23 +59,53 @@ export default {
     ItemCounter,
   },
   props: {
-    pizza: {
-      type: Object,
+    sauces: {
+      type: Array,
       required: true,
     },
-    getSauceValue: {
-      type: Function,
+    ingredients: {
+      type: Array,
       required: true,
     },
-    fillingClasses: {
-      type: Object,
-      required: true,
+    selectedSauceId: {
+      type: Number,
+      required: false,
     },
   },
   methods: {
-    onDrag: function (evt) {
+    onDrag(evt) {
       evt.dataTransfer.dropEffect = "move";
     },
+    getSauceValue(id) {
+      return id == 1 ? "tomato" : "creamy";
+    },
+    changeIngredient(changedIngredient) {
+      this.$emit("onIngredientChange", changedIngredient);
+    },
+    changeSauce(id) {
+      this.$emit("onSauceChange", id);
+    },
+  },
+  data() {
+    return {
+      fillingClasses: {
+        1: "mushrooms",
+        2: "cheddar",
+        3: "salami",
+        4: "ham",
+        5: "ananas",
+        6: "bacon",
+        7: "onion",
+        8: "chile",
+        9: "jalapeno",
+        10: "olives",
+        11: "tomatoes",
+        12: "salmon",
+        13: "mozzarella",
+        14: "parmesan",
+        15: "blue_cheese",
+      },
+    };
   },
 };
 </script>
