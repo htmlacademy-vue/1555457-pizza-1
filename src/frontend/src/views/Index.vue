@@ -57,8 +57,8 @@ export default {
     return {
       pizza: pizza,
       currentPizzaState: {
-        selectedDoughId: 1,
         selectedSizeId: 1,
+        selectedDoughId: 1,
         selectedSauceId: 1,
         ingredients: {
           mushrooms: 0,
