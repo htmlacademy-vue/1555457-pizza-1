@@ -45,7 +45,10 @@ export default {
       if (this.count == 3) {
         this.isDisabledPlusBtn == true;
       }
-      this.$emit("increaseCount", this.count, this.classValue);
+      this.$emit("changeCount", {
+        ammount: this.count,
+        ingredientName: this.classValue,
+      });
     },
     decreaseCount() {
       if (this.count > 0) {
@@ -54,7 +57,10 @@ export default {
       if (this.count == 0) {
         this.isDisabledMinusBtn = true;
       }
-      this.$emit("decreaseCount", this.count, this.classValue);
+      this.$emit("changeCount", {
+        ammount: this.count,
+        ingredientName: this.classValue,
+      });
     },
   },
 };
