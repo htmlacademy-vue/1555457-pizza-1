@@ -1,0 +1,29 @@
+<template>
+  <div>
+    <header class="header">
+      <div class="header__logo">
+        <router-link to="/"
+          ><img
+            src="../assets/img/logo.svg"
+            alt="V!U!E! Pizza logo"
+            width="90"
+            height="40"
+        /></router-link>
+      </div>
+      <div class="header__cart">
+        <router-link to="/cart">0 ₽</router-link>
+      </div>
+      <div class="header__user">
+        <router-link to="/login"><span>Войти</span></router-link>
+      </div>
+    </header>
+    <span>Здесь будет сайдбар </span>
+    <slot />
+  </div>
+</template>
+
+<script>
+export default {
+  name: "AppLayoutSidebar",
+};
+</script>
